@@ -1,5 +1,5 @@
 
-package Datos;
+package data;
 
 
 public class Data {

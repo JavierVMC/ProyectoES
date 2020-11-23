@@ -1,4 +1,4 @@
-package Logica;
+package modelo;
 
 
 public class Medico extends Persona {

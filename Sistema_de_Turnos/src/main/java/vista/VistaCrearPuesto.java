@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaz;
+package vista;
 
 /**
  *
  * @author dianademera
  */
-public class VistaPuesto {
+public class VistaCrearPuesto {
     
 }

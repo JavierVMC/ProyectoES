@@ -1,6 +1,6 @@
 
-import Logica.Medico;
-import Logica.Paciente;
+import modelo.Medico;
+import modelo.Paciente;
 
 //pruebas
 public class Main {

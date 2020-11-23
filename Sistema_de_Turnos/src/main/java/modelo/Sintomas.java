@@ -1,5 +1,5 @@
 
-package Logica;
+package modelo;
 
 
 public class Sintomas {
