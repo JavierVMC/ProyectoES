@@ -6,11 +6,15 @@
 package vista;
 
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  *
@@ -26,25 +30,28 @@ public class VistaMenu {
     private Button salir;
     
     private final String diseñoBotones = "-fx-font-size: 20;-fx-font-weight: bold;-fx-background-color:rgba(63, 127, 191, 0.4);"; 
-    private final String diseñoRoot = "";
     
     public VistaMenu(){
         root = new VBox();
         diseñoRoot();
         crearTitulo();
         crearBotones();
-        agregarBoton(principal);
-        agregarBoton(crearMedico);
-        agregarBoton(crearPuesto);
-        agregarBoton(crearPaciente);
-        agregarBoton(salir);
         diseñoBotones();
-        
-        
+        eventos();
     }
     
     private void crearTitulo(){
+        HBox h = new HBox();
+        h.setAlignment(Pos.TOP_CENTER);
+        h.setSpacing(100);
+        titulo = new Text("Sistema de turnos");
+        titulo.setFill(Color.BLACK);
+        titulo.setStroke(Color.BLACK);
+        titulo.setStrokeWidth(5);
+        titulo.setFont(new Font("Arial",80));
         
+        h.getChildren().add(titulo);
+        root.getChildren().add(h);
     }
     
     
@@ -54,26 +61,24 @@ public class VistaMenu {
         crearPuesto = new Button("Crear Puesto");
         crearPaciente = new Button("Crear Paciente");
         salir = new Button("Salir");
+        
+        root.getChildren().addAll(principal,crearMedico,crearPuesto,crearPaciente,salir);
+        
     }
     
     private void diseñoBotones(){
-        principal.setMaxWidth(100);
         principal.setMinSize(400, 100);
         principal.setStyle(diseñoBotones);
         
-        crearMedico.setMaxWidth(100);
         crearMedico.setMinSize(400, 100);
         crearMedico.setStyle(diseñoBotones);
         
-        crearPuesto.setMaxWidth(100);
         crearPuesto.setMinSize(400, 100);
         crearPuesto.setStyle(diseñoBotones);
         
-        crearPaciente.setMaxWidth(100);
         crearPaciente.setMinSize(400, 100);
         crearPaciente.setStyle(diseñoBotones);
         
-        salir.setMaxWidth(100);
         salir.setMinSize(400, 100);
         salir.setStyle(diseñoBotones);
     }
@@ -84,20 +89,71 @@ public class VistaMenu {
         root.setStyle("-fx-background.color: black;");
     }
     
-    private void agregarBoton(Button btn){
-        HBox h = new HBox();
-        h.setAlignment(Pos.CENTER);
-        h.setSpacing(20);
-        h.getChildren().add(btn);
-        root.getChildren().add(h);
-    }
-    
-    
-    
     
     
     public Pane getRoot(){
         return root;
     }
+    
+    
+    private void eventos(){
+        eventoSalir();
+        eventoPrincipal();
+        eventoCrearMedico();
+        eventoCrearPuesto();
+        eventoCrearPaciente();
+    }
+    
+    
+    
+    
+    private void eventoSalir(){
+        salir.setOnAction(
+                (e) -> {
+                    Stage st = (Stage) salir.getScene().getWindow();
+                    st.close();
+                }
+        );
+    }
+    
+    private void eventoPrincipal(){
+        principal.setOnAction(
+                (e) -> {
+                    VistaPrincipal vp = new VistaPrincipal();
+                    Stage st = new Stage();
+                    Scene sc = new Scene(vp.getRoot(), 1280, 720);
+                    st.setScene(sc);
+                    st.setTitle("Principal");
+                    st.show();
+                }
+        );
+    }
+    
+    private void eventoCrearMedico(){
+        crearMedico.setOnAction(
+                (e) -> {
+
+                }
+        );
+
+    }
+    private void eventoCrearPuesto(){
+        crearPuesto.setOnAction(
+                (e) -> {
+
+                }
+        );
+    }
+    private void eventoCrearPaciente(){
+        crearPaciente.setOnAction(
+                (e) -> {
+
+                }
+        );
+    }
+    
+    
+    
+    
     
 }
