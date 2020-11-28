@@ -22,29 +22,28 @@ import javafx.stage.Stage;
  */
 public class VistaMenu {
     private VBox root;
-    private Text titulo;
     private Button principal;
     private Button crearMedico;
     private Button crearPuesto;
     private Button crearPaciente;
     private Button salir;
     
-    private final String diseñoBotones = "-fx-font-size: 20;-fx-font-weight: bold;-fx-background-color:rgba(63, 127, 191, 0.4);"; 
+    private static final String DISENIOBOTONES = "-fx-font-size: 20;-fx-font-weight: bold;-fx-background-color:rgba(63, 127, 191, 0.4);"; 
     
     public VistaMenu(){
         root = new VBox();
-        diseñoRoot();
+        disenioRoot();
         crearTitulo();
         crearBotones();
-        diseñoBotones();
+        disenioBotones();
         eventos();
     }
     
     private void crearTitulo(){
+        Text titulo = new Text("Sistema de turnos");
         HBox h = new HBox();
         h.setAlignment(Pos.TOP_CENTER);
         h.setSpacing(100);
-        titulo = new Text("Sistema de turnos");
         titulo.setFill(Color.BLACK);
         titulo.setStroke(Color.BLACK);
         titulo.setStrokeWidth(5);
@@ -66,27 +65,26 @@ public class VistaMenu {
         
     }
     
-    private void diseñoBotones(){
+    private void disenioBotones(){
         principal.setMinSize(400, 100);
-        principal.setStyle(diseñoBotones);
+        principal.setStyle(DISENIOBOTONES);
         
         crearMedico.setMinSize(400, 100);
-        crearMedico.setStyle(diseñoBotones);
+        crearMedico.setStyle(DISENIOBOTONES);
         
         crearPuesto.setMinSize(400, 100);
-        crearPuesto.setStyle(diseñoBotones);
+        crearPuesto.setStyle(DISENIOBOTONES);
         
         crearPaciente.setMinSize(400, 100);
-        crearPaciente.setStyle(diseñoBotones);
+        crearPaciente.setStyle(DISENIOBOTONES);
         
         salir.setMinSize(400, 100);
-        salir.setStyle(diseñoBotones);
+        salir.setStyle(DISENIOBOTONES);
     }
     
-    private void diseñoRoot(){
+    private void disenioRoot(){
         root.setAlignment(Pos.CENTER);
         root.setSpacing(30);
-        root.setStyle("-fx-background.color: black;");
     }
     
     
@@ -109,7 +107,7 @@ public class VistaMenu {
     
     private void eventoSalir(){
         salir.setOnAction(
-                (e) -> {
+                e -> {
                     Stage st = (Stage) salir.getScene().getWindow();
                     st.close();
                 }
@@ -118,7 +116,7 @@ public class VistaMenu {
     
     private void eventoPrincipal(){
         principal.setOnAction(
-                (e) -> {
+                e -> {
                     VistaPrincipal vp = new VistaPrincipal();
                     Stage st = new Stage();
                     Scene sc = new Scene(vp.getRoot(), 1280, 720);
@@ -131,7 +129,7 @@ public class VistaMenu {
     
     private void eventoCrearMedico(){
         crearMedico.setOnAction(
-                (e) -> {
+                e -> {
 
                 }
         );
@@ -139,14 +137,14 @@ public class VistaMenu {
     }
     private void eventoCrearPuesto(){
         crearPuesto.setOnAction(
-                (e) -> {
+                e -> {
 
                 }
         );
     }
     private void eventoCrearPaciente(){
         crearPaciente.setOnAction(
-                (e) -> {
+                e -> {
 
                 }
         );
