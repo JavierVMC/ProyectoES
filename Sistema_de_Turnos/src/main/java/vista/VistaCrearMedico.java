@@ -6,6 +6,7 @@
 package vista;
 
 
+import data.Data;
 import excepciones.VentanaAviso;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -151,7 +152,7 @@ private VBox root;
                         String lname = tfApellidos.getText();
                         String esp = tfEspecialidad.getText();
                         Medico m = new Medico(fname,lname,esp);
-                        
+                        Data.guardarMedico(m);
                         tfNombres.clear();
                         tfApellidos.clear();
                         tfEspecialidad.clear();

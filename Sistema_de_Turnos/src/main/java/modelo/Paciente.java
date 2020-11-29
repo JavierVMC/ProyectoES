@@ -6,9 +6,9 @@ public class Paciente extends Persona{
     ///nombres, apellidos, edad, género y el síntoma que presenta.
     private int edad;
     private String genero;
-    private String sintoma;
+    private Sintoma sintoma;
     
-    public Paciente(String nombre, String apellido,int edad, String genero, String sintoma) {
+    public Paciente(String nombre, String apellido,int edad, String genero, Sintoma sintoma) {
         super(nombre, apellido);
         this.edad = edad;
         this.genero = genero;
@@ -17,7 +17,7 @@ public class Paciente extends Persona{
 
     @Override
     public String toString() {
-        return  super.toString()+" | "+edad+" | "+genero+" | "+sintoma;
+        return  super.toString()+"|"+edad+"|"+genero+"|"+sintoma;
     }
     
     

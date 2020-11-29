@@ -145,7 +145,7 @@ public class VistaMenu {
     private void eventoCrearPuesto(){
         crearPuesto.setOnAction(
                 e -> {
-
+                    
                 }
         );
     }

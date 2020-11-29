@@ -5,6 +5,7 @@
  */
 package vista;
 
+import data.Data;
 import excepciones.VentanaAviso;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -27,6 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import modelo.Paciente;
+import modelo.Sintoma;
 
 /**
  *
@@ -187,14 +189,13 @@ public class VistaCrearPaciente{
 
                         if(isNumeric(tfEdad.getText())){
                             age = Integer.parseInt(tfEdad.getText());
-                            
-                            Paciente p = new Paciente(fname, lname,age,gen,sint);
-                            
+                            Sintoma s = new Sintoma(sint,1);
+                            Paciente p = new Paciente(fname, lname,age,gen,s);
+                            Data.guardarPaciente(p);
                             tfNombres.clear();
                             tfApellidos.clear();
                             tfSintoma.clear();
                             tfEdad.clear();
-                            
                             group.getSelectedToggle().setSelected(false);
                             
                             VentanaAviso.mostrarAviso("Estado del Registro","Paciente registrado con exito.",Color.GREEN);
