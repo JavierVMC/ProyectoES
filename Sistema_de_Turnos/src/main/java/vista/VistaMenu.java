@@ -28,7 +28,8 @@ public class VistaMenu {
     private Button crearPaciente;
     private Button salir;
     
-    private static final String DISENIOBOTONES = "-fx-font-size: 20;-fx-font-weight: bold;-fx-background-color:rgba(63, 127, 191, 0.4);"; 
+    private static final String DISENIOROOT = "-fx-background-color: rgba(219, 219, 219, 0.5);";
+    private static final String DISENIOBOTONES = "-fx-font-type: Tahoma;-fx-font-size: 20;-fx-background-color:rgba(63, 127, 191, 0.4);"; 
     
     public VistaMenu(){
         root = new VBox();
@@ -46,8 +47,8 @@ public class VistaMenu {
         h.setSpacing(100);
         titulo.setFill(Color.BLACK);
         titulo.setStroke(Color.BLACK);
-        titulo.setStrokeWidth(5);
-        titulo.setFont(new Font("Arial",80));
+        titulo.setStrokeWidth(1);
+        titulo.setFont(new Font("Tahoma",80));
         
         h.getChildren().add(titulo);
         root.getChildren().add(h);
@@ -66,24 +67,25 @@ public class VistaMenu {
     }
     
     private void disenioBotones(){
-        principal.setMinSize(400, 100);
+        principal.setMinSize(400, 90);
         principal.setStyle(DISENIOBOTONES);
         
-        crearMedico.setMinSize(400, 100);
+        crearMedico.setMinSize(400, 90);
         crearMedico.setStyle(DISENIOBOTONES);
         
-        crearPuesto.setMinSize(400, 100);
+        crearPuesto.setMinSize(400, 90);
         crearPuesto.setStyle(DISENIOBOTONES);
         
-        crearPaciente.setMinSize(400, 100);
+        crearPaciente.setMinSize(400, 90);
         crearPaciente.setStyle(DISENIOBOTONES);
         
-        salir.setMinSize(400, 100);
+        salir.setMinSize(400, 90);
         salir.setStyle(DISENIOBOTONES);
     }
     
     private void disenioRoot(){
         root.setAlignment(Pos.CENTER);
+        root.setStyle(DISENIOROOT);
         root.setSpacing(30);
     }
     
@@ -145,7 +147,12 @@ public class VistaMenu {
     private void eventoCrearPaciente(){
         crearPaciente.setOnAction(
                 e -> {
-
+                    VistaCrearPaciente vcp = new VistaCrearPaciente();
+                    Stage st = new Stage();
+                    Scene sc = new Scene(vcp.getRoot(), 1280, 720);
+                    st.setScene(sc);
+                    st.setTitle("Ingreso de paciente");
+                    st.show();
                 }
         );
     }

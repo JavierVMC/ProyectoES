@@ -5,10 +5,168 @@
  */
 package vista;
 
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+
 /**
  *
  * @author dianademera
  */
 public class VistaCrearPaciente {
+    private VBox root;
+    private GridPane grid;
+    private TextField tfNombres;
+    private TextField tfApellidos;
+    private TextField tfEdad;
+    private TextField tfSintoma;
+    private Label nombres;
+    private Label apellidos;
+    private Label edad;
+    private Label genero;
+    private Label sintoma;
+    private Button btingresar;
+    
+    private static final String DISENIOROOT = "-fx-background-color: rgba(219, 219, 219, 0.5);";
+    private static final String DISENIOLABELS = "-fx-font-size: 30;-fx-font-weight: bold;";
+    private static final String DISENIOBOTONES = "-fx-font-type: Tahoma;-fx-font-size: 20;-fx-background-color:rgba(63, 127, 191, 0.4);"; 
+    
+    public VistaCrearPaciente(){
+        root = new VBox();
+        grid = new GridPane();
+        disenioRoot();
+        disenioGrid();
+        agregarTitulo();
+        agregarLabels();
+        agregarTextfields();
+        disenioLabels();
+        disenioTextfields();
+        agregarGrid();
+        agregarRButtons();
+        agregarButton();
+    }
+    
+    private void disenioRoot(){
+        root.setAlignment(Pos.CENTER);
+        root.setStyle(DISENIOROOT);
+        root.setSpacing(20);
+    }
+    
+    private void disenioGrid(){
+        grid.setAlignment(Pos.TOP_CENTER);
+        grid.setHgap(20);
+        grid.setVgap(20);
+        grid.setPadding(new Insets(50, 100, 50, 25));
+        
+        ColumnConstraints column1 = new ColumnConstraints();
+        column1.setPercentWidth(20);
+        ColumnConstraints column2 = new ColumnConstraints();
+        column2.setPercentWidth(80);
+        grid.getColumnConstraints().addAll(column1, column2);
+        column1.setHalignment(HPos.RIGHT);
+
+        RowConstraints row1 = new RowConstraints();
+        row1.setValignment(VPos.CENTER);
+        column1.setHgrow(Priority.ALWAYS);
+    }    
+    
+    private void agregarTitulo(){
+        Text scenetitle = new Text("Datos del paciente a ingresar");
+        scenetitle.setStrokeWidth(1);
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 50));
+        root.getChildren().add(scenetitle);
+    }
+    
+    
+    private void agregarLabels(){
+        nombres = new Label("Nombres: ");
+        apellidos = new Label("Apellidos: ");
+        edad = new Label("Edad: ");
+        genero = new Label("Genero: ");
+        sintoma = new Label("Sintoma: ");
+        
+        grid.add(nombres, 0, 1);
+        grid.add(apellidos, 0, 2);
+        grid.add(edad, 0, 3);
+        grid.add(genero, 0, 4);
+        grid.add(sintoma, 0, 6);
+        
+        
+    }
+    
+    private void agregarTextfields(){
+        tfNombres = new TextField();
+        tfApellidos = new TextField();
+        tfEdad = new TextField();
+        tfSintoma = new TextField();
+        
+        grid.add(tfNombres, 1, 1);
+        grid.add(tfApellidos, 1, 2);
+        grid.add(tfEdad, 1, 3);
+        grid.add(tfSintoma, 1, 6);
+    }
+    
+    private void agregarRButtons(){
+        ToggleGroup group = new ToggleGroup(); 
+
+        RadioButton rb1 = new RadioButton("Masculino"); 
+        rb1.setUserData("Masculino"); 
+        rb1.setToggleGroup(group); 
+
+        RadioButton rb2 = new RadioButton("Femenino"); 
+        rb2.setUserData("Femenino"); 
+        rb2.setToggleGroup(group); 
+        
+        grid.add(rb1, 1, 4);
+        grid.add(rb2, 1, 5);
+        
+    }
+    
+    private void disenioLabels(){
+        nombres.setStyle(DISENIOLABELS);
+        apellidos.setStyle(DISENIOLABELS);
+        edad.setStyle(DISENIOLABELS);
+        genero.setStyle(DISENIOLABELS);
+        sintoma.setStyle(DISENIOLABELS);
+
+    }
+    
+    private void disenioTextfields(){
+        tfNombres.setPrefHeight(30);
+        tfApellidos.setPrefHeight(30);
+        tfEdad.setPrefHeight(30);
+        tfSintoma.setPrefHeight(30);
+    }
+    
+    private void agregarGrid(){
+        root.getChildren().add(grid);
+    }
+    
+    private void agregarButton(){
+        btingresar = new Button("Ingresar");
+        btingresar.setMinSize(150, 50);
+        btingresar.setStyle(DISENIOBOTONES);
+        root.getChildren().add(btingresar);
+    }
+
+    public Pane getRoot() {
+        return root;
+    }
+    
     
 }

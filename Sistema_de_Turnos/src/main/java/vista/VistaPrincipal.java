@@ -19,7 +19,6 @@ public class VistaPrincipal {
     }
     
     
-    
     public Pane getRoot(){
         return root;
     }

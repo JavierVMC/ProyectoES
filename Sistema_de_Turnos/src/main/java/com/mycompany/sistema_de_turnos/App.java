@@ -17,6 +17,7 @@ public class App extends Application {
     public void start(Stage stage) {
         vm = new VistaMenu();
         Scene scene = new Scene(vm.getRoot(), 1280, 720);
+        stage.setResizable(false);
         stage.setTitle("Sistema de turnos");
         stage.setScene(scene);
         stage.show();
