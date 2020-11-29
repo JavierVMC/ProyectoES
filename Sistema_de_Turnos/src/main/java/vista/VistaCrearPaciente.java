@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -182,18 +183,28 @@ public class VistaCrearPaciente{
                         String lname = tfApellidos.getText();
                         String gen = group.getSelectedToggle().getUserData().toString();
                         String sint = tfSintoma.getText();
-                        System.out.println(group.getSelectedToggle());
                         int age;
 
                         if(isNumeric(tfEdad.getText())){
                             age = Integer.parseInt(tfEdad.getText());
+                            
                             Paciente p = new Paciente(fname, lname,age,gen,sint);
+                            
+                            tfNombres.clear();
+                            tfApellidos.clear();
+                            tfSintoma.clear();
+                            tfEdad.clear();
+                            
+                            group.getSelectedToggle().setSelected(false);
+                            
+                            VentanaAviso.mostrarAviso("Estado del Registro","Paciente registrado con exito.",Color.GREEN);
+                            
                         }
                         else{
-                            VentanaAviso.mostrarAviso("La edad ingresada debe ser un numero.");
+                            VentanaAviso.mostrarAviso("Advertencia","La edad ingresada debe ser un numero.",Color.RED);
                         }
                     }else{
-                        VentanaAviso.mostrarAviso("Todos los campos son obligatorios.");
+                        VentanaAviso.mostrarAviso("Advertencia","Todos los campos son obligatorios.",Color.RED);
                     }      
                 }
         );

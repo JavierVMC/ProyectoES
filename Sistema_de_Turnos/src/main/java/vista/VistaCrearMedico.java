@@ -6,6 +6,7 @@
 package vista;
 
 
+import excepciones.VentanaAviso;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,9 +20,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import modelo.Medico;
 
 /**
  *
@@ -141,7 +144,25 @@ private VBox root;
     private void eventoBtingresar(){
         btingresar.setOnAction(
                 e ->{
-                    
+                    if(!tfNombres.getText().isBlank() && !tfApellidos.getText().isBlank() 
+                            && !tfEspecialidad.getText().isBlank()){
+                        
+                        String fname = tfNombres.getText();
+                        String lname = tfApellidos.getText();
+                        String esp = tfEspecialidad.getText();
+                        Medico m = new Medico(fname,lname,esp);
+                        
+                        tfNombres.clear();
+                        tfApellidos.clear();
+                        tfEspecialidad.clear();
+                        
+                        VentanaAviso.mostrarAviso("Estado del Registro","Medico registrado con exito.",Color.GREEN);
+                        
+                        
+                    }else{
+                        VentanaAviso.mostrarAviso("Advertencia","Todos los campos son obligatorios.",Color.RED);
+                    }      
+                
                 }
         );
     }
