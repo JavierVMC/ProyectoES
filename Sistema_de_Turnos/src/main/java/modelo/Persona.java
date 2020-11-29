@@ -3,17 +3,17 @@ package modelo;
 
 
 public class Persona {
-    private String nombre;
-    private String apellido;
+    private String nombres;
+    private String apellidos;
 
-    public Persona(String nombre, String apellido) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+    public Persona(String nombres, String apellidos) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
     }
 
     @Override
     public String toString() {
-        return nombre+','+apellido;
+        return nombres+" | "+apellidos;
     }
     
     

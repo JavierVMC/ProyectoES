@@ -5,6 +5,7 @@
  */
 package vista;
 
+import excepciones.VentanaAviso;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,6 +13,7 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.ColumnConstraints;
@@ -23,12 +25,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import modelo.Paciente;
 
 /**
  *
  * @author dianademera
  */
-public class VistaCrearPaciente {
+public class VistaCrearPaciente{
     private VBox root;
     private GridPane grid;
     private TextField tfNombres;
@@ -41,6 +44,7 @@ public class VistaCrearPaciente {
     private Label genero;
     private Label sintoma;
     private Button btingresar;
+    private ToggleGroup group;
     
     private static final String DISENIOROOT = "-fx-background-color: rgba(219, 219, 219, 0.5);";
     private static final String DISENIOLABELS = "-fx-font-size: 30;-fx-font-weight: bold;";
@@ -59,6 +63,7 @@ public class VistaCrearPaciente {
         agregarGrid();
         agregarRButtons();
         agregarButton();
+        eventoBtingresar();
     }
     
     private void disenioRoot(){
@@ -122,7 +127,7 @@ public class VistaCrearPaciente {
     }
     
     private void agregarRButtons(){
-        ToggleGroup group = new ToggleGroup(); 
+        group = new ToggleGroup(); 
 
         RadioButton rb1 = new RadioButton("Masculino"); 
         rb1.setUserData("Masculino"); 
@@ -166,6 +171,41 @@ public class VistaCrearPaciente {
 
     public Pane getRoot() {
         return root;
+    }
+    
+    private void eventoBtingresar(){
+        btingresar.setOnMouseClicked(
+                e ->{
+                    if(!tfNombres.getText().isBlank() && !tfApellidos.getText().isBlank() 
+                            && group.getSelectedToggle()!=null && !tfEdad.getText().isBlank() && !tfSintoma.getText().isBlank()){
+                        String fname = tfNombres.getText();
+                        String lname = tfApellidos.getText();
+                        String gen = group.getSelectedToggle().getUserData().toString();
+                        String sint = tfSintoma.getText();
+                        System.out.println(group.getSelectedToggle());
+                        int age;
+
+                        if(isNumeric(tfEdad.getText())){
+                            age = Integer.parseInt(tfEdad.getText());
+                            Paciente p = new Paciente(fname, lname,age,gen,sint);
+                        }
+                        else{
+                            VentanaAviso.mostrarAviso("La edad ingresada debe ser un numero.");
+                        }
+                    }else{
+                        VentanaAviso.mostrarAviso("Todos los campos son obligatorios.");
+                    }      
+                }
+        );
+    }
+    
+    private static boolean isNumeric(String s){
+        try{
+            Integer.parseInt(s);
+        }catch (NumberFormatException ex){
+            return false;
+        }
+        return true;
     }
     
     

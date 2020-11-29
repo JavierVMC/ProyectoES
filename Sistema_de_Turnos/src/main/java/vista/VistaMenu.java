@@ -132,7 +132,12 @@ public class VistaMenu {
     private void eventoCrearMedico(){
         crearMedico.setOnAction(
                 e -> {
-
+                    VistaCrearMedico vcm = new VistaCrearMedico();
+                    Stage st = new Stage();
+                    Scene sc = new Scene(vcm.getRoot(), 1280, 720);
+                    st.setScene(sc);
+                    st.setTitle("Ingreso de medico");
+                    st.show();
                 }
         );
 
