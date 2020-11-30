@@ -26,7 +26,7 @@ public class VentanaAviso {
     /**
      * Diseño aplicado a los labels de la clase VentanaAviso
      */
-    private final String DISENIOLABEL = "-fx-font-size: 20;-fx-font-weight: bold;";
+    private static final String DISENIOLABEL = "-fx-font-size: 20;-fx-font-weight: bold;";
     
     /**
      * Constructor de la clase VentanaAviso

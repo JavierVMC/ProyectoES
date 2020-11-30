@@ -1,12 +1,15 @@
 
 package modelo;
 
-public class Puesto {
+public class Puesto implements Comparable<Puesto>{
     private String numero;
     private Medico medicoAsignado;
+    
+    private boolean disponible;
 
     public Puesto(String numero) {
         this.numero = numero;
+        disponible = true;
     }
     
     public Puesto(String numero, Medico medicoAsignado) {
@@ -30,10 +33,28 @@ public class Puesto {
         this.medicoAsignado = medicoAsignado;
     }
 
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
     @Override
     public String toString() {
         return numero+"|"+medicoAsignado;
     }
     
+    @Override
+    public int compareTo(Puesto o) {
+        if(this.disponible==false && o.isDisponible()==true)
+            return -1;
+        else if(this.disponible==true && o.isDisponible()==false)
+            return 1;
+        return 0;
+    }
+    
+
     
 }

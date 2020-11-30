@@ -5,11 +5,9 @@ import excepciones.VentanaError;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -44,15 +42,14 @@ public class Data {
 
     /**
      * Retorna un HashMap con el nombre del sintoma como clave y la prioridad como valor
-     * @param direccion
      * @return 
      */
-    public static HashMap<String,Integer> leerArchivointomas() {
+    public static HashMap<String,Integer> leerArchivoSintomas() {
             HashMap<String,Integer> mapa = new HashMap<>();
             try(BufferedReader bf=new BufferedReader(new FileReader(FILE_SINTOMAS))){
                 String linea;
                 while((linea=bf.readLine())!=null){
-                    String[] l = linea.split("/|");
+                    String[] l = linea.split("\\|");
                     Sintoma s = new Sintoma(l[0],Integer.parseInt(l[1]));
                     mapa.put(s.getSintoma(), s.getPrioridad());
                 }  
@@ -70,9 +67,9 @@ public class Data {
     public static void guardarPaciente(Paciente p){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PACIENTES,true))) {
             bw.write(p.toString());
-            
+            bw.newLine();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            VentanaError.mostrarError(ex);
         }
     
     }
@@ -83,9 +80,9 @@ public class Data {
     public static void guardarMedico(Medico m){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_MEDICOS,true))) {
             bw.write(m.toString());
-            
+            bw.newLine();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            VentanaError.mostrarError(ex);
         }
     
     }
@@ -96,9 +93,9 @@ public class Data {
     public static void guardarPuesto(Puesto p){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PUESTOS,true))) {
             bw.write(p.toString());
-            
+            bw.newLine();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            VentanaError.mostrarError(ex);
         }
     
     }
@@ -108,11 +105,11 @@ public class Data {
      */
     public static List<Paciente> leerArchivoPacientes(){
         List<Paciente> pacientes = new LinkedList<>();
-        HashMap<String,Integer> sintomas = leerArchivointomas();
+        HashMap<String,Integer> sintomas = leerArchivoSintomas();
         try (BufferedReader bf = new BufferedReader(new FileReader(FILE_PACIENTES))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
-                String[] l = linea.split("/|");
+                String[] l = linea.split("\\|");
                 Sintoma s = new Sintoma(l[4],sintomas.get(l[4]));
                 Paciente p = new Paciente(l[0], l[1],Integer.parseInt(l[2]),l[3],s);
                 pacientes.add(p);
@@ -133,7 +130,7 @@ public class Data {
         try (BufferedReader bf = new BufferedReader(new FileReader(FILE_MEDICOS))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
-                String[] l = linea.split("/|");
+                String[] l = linea.split("\\|");
                 Medico m = new Medico(l[0], l[1],l[2]);
                 medicos.add(m);
             }
@@ -153,7 +150,7 @@ public class Data {
         try (BufferedReader bf = new BufferedReader(new FileReader(FILE_PUESTOS))) {
             String linea;
             while ((linea = bf.readLine()) != null) {
-                String[] l = linea.split("/|");
+                String[] l = linea.split("\\|");
                 Medico m = new Medico(l[1],l[2],l[3]);
                 Puesto p = new Puesto(l[0], m);
                 puestos.add(p);
@@ -166,5 +163,49 @@ public class Data {
         return puestos;
     }
     
+    /**
+     * Elimina del archivo puestos el puesto pasado como parametro
+     * @param puesto
+     */
+    public static void eliminarPuesto(String puesto){
+        List<String> puestos = lineasPuestos();
+        puestos.remove(puesto);
+        
+        vaciarArchivoPuestos();
+        reescribirArchivoPuestos(puestos);
+    }
     
+    private static List<String> lineasPuestos(){
+        List<String> puestos = new ArrayList<>();
+        try (BufferedReader bf = new BufferedReader(new FileReader(FILE_PUESTOS))) {
+            String linea;
+            while ((linea = bf.readLine()) != null) {
+                puestos.add(linea);
+            }
+        } catch (FileNotFoundException ex) {
+            VentanaError.mostrarError(ex);
+        } catch (IOException ex) {
+            VentanaError.mostrarError(ex);
+        }
+        return puestos;
+    }
+    
+    private static void reescribirArchivoPuestos(List<String> puestos){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PUESTOS,true))) {
+            for(int i=0;i<puestos.size();i++){
+                bw.write(puestos.get(i));
+                bw.newLine();
+            }
+        } catch (IOException ex) {
+            VentanaError.mostrarError(ex);
+        }
+    }
+    
+    private static void vaciarArchivoPuestos(){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PUESTOS))) {
+            bw.write("");
+        } catch (IOException ex) {
+            VentanaError.mostrarError(ex);
+        }
+    }
 }

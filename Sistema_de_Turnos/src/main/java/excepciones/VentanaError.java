@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -19,13 +20,16 @@ public class VentanaError {
     /**
      * Root de la clase VentanaError
      */
-    HBox root;
+    private HBox root;
+    private static final String DISENIOLABEL = "-fx-font-size: 20;-fx-font-weight: bold;";
     /**
      * Constructor de la clase VentanaError
      * @param mensaje 
      */
     public VentanaError(String mensaje) {
         Label l = new Label(mensaje);
+        l.setStyle(DISENIOLABEL);
+        l.setTextFill(Color.RED);
         root = new HBox();
         root.setAlignment(Pos.CENTER);
         root.setSpacing(10);

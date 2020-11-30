@@ -27,6 +27,7 @@ public class VistaMenu {
     private Button crearPuesto;
     private Button crearPaciente;
     private Button salir;
+    private static VistaPrincipal vp;
     
     private static final String DISENIOROOT = "-fx-background-color: rgba(219, 219, 219, 0.5);";
     private static final String DISENIOBOTONES = "-fx-font-type: Tahoma;-fx-font-size: 20;-fx-background-color:rgba(63, 127, 191, 0.4);"; 
@@ -119,7 +120,7 @@ public class VistaMenu {
     private void eventoPrincipal(){
         principal.setOnAction(
                 e -> {
-                    VistaPrincipal vp = new VistaPrincipal();
+                    vp = new VistaPrincipal();
                     Stage st = new Stage();
                     Scene sc = new Scene(vp.getRoot(), 1280, 720);
                     st.setScene(sc);
@@ -145,7 +146,12 @@ public class VistaMenu {
     private void eventoCrearPuesto(){
         crearPuesto.setOnAction(
                 e -> {
-                    
+                    VistaCrearPuesto vcp = new VistaCrearPuesto();
+                    Stage st = new Stage();
+                    Scene sc = new Scene(vcp.getRoot(), 1280, 720);
+                    st.setScene(sc);
+                    st.setTitle("Administracion de puestos");
+                    st.show();
                 }
         );
     }
@@ -163,7 +169,10 @@ public class VistaMenu {
     }
     
     
-    
+    public void terminarHilos(){
+        if(vp!=null)
+            vp.terminarHiloReloj();
+    }
     
     
 }

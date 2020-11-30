@@ -1,1 +1,4 @@
 Javier Alejandro|Vega Molina|15|Masculino|resfrio
+David|Vega|12|Masculino|v�mito|
+Javier Alejandro|Vega Molina|19|Masculino|resfrio
+dfdf|dfdf|45|Femenino|resfrio
