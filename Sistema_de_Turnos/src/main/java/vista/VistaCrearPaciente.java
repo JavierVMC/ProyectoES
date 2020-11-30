@@ -50,6 +50,7 @@ public class VistaCrearPaciente{
     private Label sintoma;
     private Button btingresar;
     private ToggleGroup group;
+    private int contadorTurno = 0;
     
     private static final String DISENIOROOT = "-fx-background-color: rgba(219, 219, 219, 0.5);";
     private static final String DISENIOLABELS = "-fx-font-size: 30;-fx-font-weight: bold;";
@@ -197,9 +198,11 @@ public class VistaCrearPaciente{
                                 Sintoma s = new Sintoma(sint,1);
                                 Paciente p = new Paciente(fname, lname,age,gen,s);
                                 Data.guardarPaciente(p);
-
+                                p.setNomPuesto("A1");
+                                p.setTurno(String.valueOf(contadorTurno));
+                                contadorTurno++;
                                 Sistema.agregarPaciente(p);
-
+                                
                                 tfNombres.clear();
                                 tfApellidos.clear();
                                 tfSintoma.clear();

@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import data.Data;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -18,15 +19,24 @@ public class Sistema {
     public static Stack<Puesto> pilaPuestos;
     
     public Sistema(){
-        colaPacientes = new PriorityQueue<>((Paciente p1, Paciente p2)->(p1.getSintoma().getPrioridad()-p2.getSintoma().getPrioridad()));
+        colaPacientes = new PriorityQueue<>((Paciente p1, Paciente p2)->(p2.getSintoma().getPrioridad()-p1.getSintoma().getPrioridad()));
         colaPuestos = new PriorityQueue<>();
         pilaPuestos = new Stack();
     }
+    public void cargarColaPacientes(){
+        colaPacientes.addAll(Data.leerArchivoPacientes());
+    }
     
-    private static void llenarPila(){
+    public void cargarColaPuestos(){
+        colaPuestos.addAll(Data.leerArchivoPuestos());
+        llenarPila();
+    }
+    
+    public static void llenarPila(){
         while(!colaPuestos.isEmpty()){
             pilaPuestos.push(colaPuestos.poll());
         }
+        System.out.println(pilaPuestos);
     }
     
     
@@ -41,7 +51,6 @@ public class Sistema {
     
     public static void agregarPuesto(Puesto p){
         colaPuestos.offer(p);
-        llenarPila();
     }
     
     

@@ -22,7 +22,15 @@ public class Data {
     /**
      * Path del video 1
      */
-    private final static String FILE_VIDEO1 = Constants.RESOURCE_FOLDER_VIDEO+"/";
+    private final static String FILE_VIDEO1 = Constants.RESOURCE_FOLDER_VIDEO+"/video1.mp4";
+    /**
+     * Path del video 2
+     */
+    private final static String FILE_VIDEO2 = Constants.RESOURCE_FOLDER_VIDEO+"/video2.mp4";
+    /**
+     * Path del video 3
+     */
+    private final static String FILE_VIDEO3 = Constants.RESOURCE_FOLDER_VIDEO+"/video3.mp4";
     /**
      * Path del archivo sintomas
      */
@@ -40,6 +48,15 @@ public class Data {
      */
     private final static String FILE_PUESTOS = Constants.RESOURCE_FOLDER_ARCHIVOS+"/puestos.txt";
 
+    
+    
+    
+    
+    private Data() {
+        throw new IllegalStateException("Utility class");
+    }
+    
+    
     /**
      * Retorna un HashMap con el nombre del sintoma como clave y la prioridad como valor
      * @return 
@@ -58,6 +75,7 @@ public class Data {
             }catch (IOException ex){
                 VentanaError.mostrarError(ex);
             }
+            System.out.println(mapa);
             return mapa;
     }
     /**
@@ -175,6 +193,10 @@ public class Data {
         reescribirArchivoPuestos(puestos);
     }
     
+    /**
+     * Retorna una lista de String con las lineas del archivo puestos
+     * @return 
+     */
     private static List<String> lineasPuestos(){
         List<String> puestos = new ArrayList<>();
         try (BufferedReader bf = new BufferedReader(new FileReader(FILE_PUESTOS))) {
@@ -190,6 +212,10 @@ public class Data {
         return puestos;
     }
     
+    /**
+     * Reescribe el archivo con las lineas en la lista pasada como parametro
+     * @param puestos 
+     */
     private static void reescribirArchivoPuestos(List<String> puestos){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PUESTOS,true))) {
             for(int i=0;i<puestos.size();i++){
@@ -201,6 +227,9 @@ public class Data {
         }
     }
     
+    /**
+     * Borra todas las lineas del archivo puestos
+     */
     private static void vaciarArchivoPuestos(){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PUESTOS))) {
             bw.write("");

@@ -113,8 +113,6 @@ public class VistaPrincipal {
         while(!colaPacientes.isEmpty())
             lista.add(colaPacientes.poll());
         
-        
-        
         llenarTabla(lista);
 
         tabla.setEditable(false);

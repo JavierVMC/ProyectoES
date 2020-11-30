@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import modelo.Sistema;
 
 /**
  *
@@ -39,6 +40,8 @@ public class VistaMenu {
         crearBotones();
         disenioBotones();
         eventos();
+        Sistema s = new Sistema();
+        s.cargarColaPuestos();
     }
     
     private void crearTitulo(){
